@@ -280,7 +280,7 @@ function visualizetopTenWicketTaker(topTenWicketTaker) {
 function  eventListener()
 { 
     const year=document.getElementById("year").value;
-  fetch("/economy?year="+year)  //"/economy?year=2008"
+  fetch("/economy?year="+year) 
              .then(r => r.json())
               .then(visualizeData);
     
