@@ -279,19 +279,17 @@ function visualizetopTenWicketTaker(topTenWicketTaker) {
 
 function  eventListener()
 { 
-    let year=document.getElementById("year").value;
-    function fetchAndVisualizeData() 
-    {
-            fetch("./data.json")
+    const year=document.getElementById("year").value;
+  fetch("/economy?year="+year)  //"/economy?year=2008"
              .then(r => r.json())
               .then(visualizeData);
-    }
+    
 
-      fetchAndVisualizeData();
+     
 
     function visualizeData(data) {
 
-    visualizetopTenEconomicalBowlers(data.fetchTopTenBowlerYearWise[year]); 
+    visualizetopTenEconomicalBowlers(data); 
    
     }
     function visualizetopTenEconomicalBowlers(topTenEconomicalBowlers){

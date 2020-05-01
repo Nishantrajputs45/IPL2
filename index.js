@@ -11,6 +11,7 @@ const fetchTopTenBowlerYearWise = require("./ipl/topTenEconomicalBowlerForGivenY
 const MATCHES_FILE_PATH = "./csv_data/matches.csv";
 const DELIVERIES_FILE_PATH = "./csv_data/deliveries.csv";
 const JSON_OUTPUT_FILE_PATH = "./public/data.json";
+const JSON_OUTPUT_FILE_PATH2 ="./YearWiseEconomicalBowler.json"
 function main() {
   csv()
     .fromFile(MATCHES_FILE_PATH)
@@ -26,12 +27,13 @@ function main() {
       let result5 = topTenRunGetters(deliveries);
       let result6 = topTenWicketTaker(deliveries);
       let result7 = fetchTopTenBowlerYearWise(matches,deliveries);
-      saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result6,result7);
+      saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result6);
+      saveEconomicalBowlerPerYear(result7);
     });
   });
 }
 
-function saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result6,result7) {
+function saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result6) {
   const jsonData = {
     matchesPlayedPerYear: result1,
     matchesWonByEachTeam: result2,
@@ -39,7 +41,7 @@ function saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result
     topTenEconomicalBowlers :result4,
     topTenRunGetters : result5,
     topTenWicketTaker : result6,
-    fetchTopTenBowlerYearWise : result7
+   
   };
   const jsonString = JSON.stringify(jsonData);
   fs.writeFile(JSON_OUTPUT_FILE_PATH, jsonString, "utf8", err => {
@@ -48,5 +50,18 @@ function saveMatchesPlayedPerYear(result1,result2,result3,result4,result5,result
     }
   });
 }
+function saveEconomicalBowlerPerYear(result7)
+{
+  const jsonData = {
 
+    fetchTopTenBowlerYearWise : result7
+  };
+  const jsonString = JSON.stringify(jsonData);
+  fs.writeFile(JSON_OUTPUT_FILE_PATH2, jsonString, "utf8", err => {
+    if (err) {
+      console.error(err);
+    }
+  });
+
+}
 main();
