@@ -46,7 +46,17 @@ function topTenEconomicalBowlers(matches,deliveries)
       }
     }
   }
-    return res;
+  let outdata={};
+   count=0;
+   for(let i in res)
+   {
+     if(count<10){
+       outdata[i]=res[i];
+       count++;
+     }  
+     
+   }
+    return outdata;
     
 }
 

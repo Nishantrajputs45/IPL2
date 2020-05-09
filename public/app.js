@@ -3,7 +3,7 @@ function fetchAndVisualizeData() {
     .then(r => r.json())
     .then(visualizeData);
 }
-
+ 
 fetchAndVisualizeData();
 
 function visualizeData(data) {
@@ -279,8 +279,10 @@ function visualizetopTenWicketTaker(topTenWicketTaker) {
 
 function  eventListener()
 { 
-    const year=document.getElementById("year").value;
-  fetch("/economy?year=" +year) 
+    const year1=document.getElementById("year1").value;
+    const year2=document.getElementById("year2").value;
+    
+  fetch("/economy?year="+[year1,year2]) 
              .then(r => r.json())
               .then(visualizeData)
               .catch((error) => {
@@ -293,10 +295,20 @@ function  eventListener()
    
     }
     function visualizetopTenEconomicalBowlers(topTenEconomicalBowlers){
-      const seriesData = [];
-       for (let bowler in topTenEconomicalBowlers) {
-       seriesData.push([bowler,topTenEconomicalBowlers[bowler]]);
+      let c;
+      const year=[];
+       for (let y in topTenEconomicalBowlers) {
+         let t=[];
+         for(let z in topTenEconomicalBowlers[y])
+         {
+           t.push(topTenEconomicalBowlers[y][z])
+
+         }
+         console.log(t);
+        year.push([y,t]);
+          
         }
+       
 
        Highcharts.chart("top-Ten-Economical-Bowlers-yearwise", {
       chart: {
@@ -321,7 +333,7 @@ function  eventListener()
    series: [
   {
   name: "Bowler",
-  data: seriesData
+  data: year
   }
   ]
   });

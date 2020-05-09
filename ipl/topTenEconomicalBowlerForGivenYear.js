@@ -4,6 +4,7 @@ function topTenEconomicalBowlerForGivenYear(matches,deliveries)
     const economicalBowlers={};
     for(let y=2008;y<=2019;y++)
     {
+      
       let noOfRuns = {};
       let noOfOver ={};
       let result ={};
@@ -38,20 +39,28 @@ function topTenEconomicalBowlerForGivenYear(matches,deliveries)
     }
     let temp=Object.values(result);
     temp.sort(function(a, b){return a-b});
-    
+   
     for(let i=0;i<10;i++)
     {
       for(let j in result)
       {
-      if(result[j]==temp[i])
+      if(result[j]==temp[i] )
       {
-        
-          res[j]=temp[i];
+          res[j]=temp[i];    
       }
     }
   }
-
-  economicalBowlers[y]=res;
+   let outdata={};
+   count=0;
+   for(let i in res)
+   {
+     if(count<10){
+       outdata[i]=res[i];
+       count++;
+     }  
+     
+   }
+  economicalBowlers[y]=outdata;
 }
   return economicalBowlers;
     

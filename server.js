@@ -6,8 +6,15 @@ app.use(express.static('public'));
 
 app.get('/economy', (req, res) => {
     let year =req.query.year;
-    const result =economicalData.fetchTopTenBowlerYearWise[year];
-    res.send(result);
+    let t=year.split(",");
+    const result={};
+   for(let i=parseInt(t[0]);i<=parseInt(t[1]);i++)
+   {
+      result[i] =economicalData.fetchTopTenBowlerYearWise[i];
+    
+   }
+  
+   res.send(result);
 });
 
 app.listen(process.env.PORT || 8000, () => console.log('Gator app listening on port 8000!'));
